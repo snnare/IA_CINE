@@ -1,4 +1,17 @@
 package uaemex.ia.control;
 
-public class Promocion {
+import jade.content.Predicate;
+
+import java.io.Serializable;
+
+public class Promocion implements Predicate , Serializable {
+    private Boletos boleto;
+
+    public Boletos getBoleto() {
+        return boleto;
+    }
+
+    public void setBoleto(Boletos boleto) {
+        this.boleto = boleto;
+    }
 }

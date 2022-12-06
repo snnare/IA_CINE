@@ -59,7 +59,7 @@ public class OntologiaCine extends Ontology {
             // Schema Boletos
             ConceptSchema conceptSchema =  (ConceptSchema) getSchema(BOLETOS);
             conceptSchema.add(BOLETOS_NOMBRE,(PrimitiveSchema)getSchema((BasicOntology.STRING)));
-            conceptSchema.add(BOLETOS_ASIENTO,(PrimitiveSchema)getSchema((BasicOntology.INTEGER)));
+            conceptSchema.add(BOLETOS_ASIENTO,(PrimitiveSchema)getSchema((BasicOntology.STRING)));
             conceptSchema.add(BOLETOS_TIPO_DE_SALA,(PrimitiveSchema)getSchema((BasicOntology.STRING)));
             conceptSchema.add(BOLETOS_SALA_ASIGNADA,(PrimitiveSchema)getSchema((BasicOntology.STRING)));
             conceptSchema.add(BOLETOS_PRECIO,(PrimitiveSchema)getSchema((BasicOntology.FLOAT)));
