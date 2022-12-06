@@ -1,4 +1,4 @@
 package uaemex.ia.control;
 
-public class Cliente {
+public class Boletos {
 }
