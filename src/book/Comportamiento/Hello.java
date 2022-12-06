@@ -1,4 +1,4 @@
-package book;
+package book.Comportamiento;
 
 import jade.core.AID;
 import jade.core.Agent;

@@ -1,2 +1,4 @@
-package uaemex.ia.data;public interface Data {
+package uaemex.ia.data;
+
+public interface Data {
 }

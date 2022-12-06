@@ -1,4 +1,4 @@
-package book.ACL;
+package ACL;
 
 import jade.core.AID;
 import jade.core.Agent;

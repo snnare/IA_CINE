@@ -1,4 +1,4 @@
-package book.ACL;
+package ACL;
 
 import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
