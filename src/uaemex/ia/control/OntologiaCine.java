@@ -23,11 +23,21 @@ public class OntologiaCine extends Ontology {
     public static final String BOLETOS_FECHA = "Fecha";
     public static final String BOLETOS_CANTIDAD = "Cantidad";
 
+
+    public static final String PAQUETE = "Paquete";
+    public static final String PAQUETE_NOMBRE = "Nombre";
+    public static final String PAQUETE_TIPO = "Tipo";
+    public static final String PAQUETE_PRECIO = "Precio";
+    public static final String PAQUETE_CANTIDAD = "Cantidad";
+    public static final String PAQUETE_DESCRIPCION = "Descripcion";
+
+
     public static final String PROMOCION = "Promocion";
     public static final String PROMOCION_BOLETOS = "Boletos";
 
     public static final String COMPRA = "Compra";
     public static final String COMPRA_BOLETOS = "Boletos";
+    public static final String COMPRA_PAQUETE = "Paquete";
 
 
     private static Ontology instance = new OntologiaCine();
@@ -42,9 +52,11 @@ public class OntologiaCine extends Ontology {
 
         try {
             add(new ConceptSchema(BOLETOS), Boletos.class);
+            add(new ConceptSchema(PAQUETE), Paquete.class);
             add(new PredicateSchema(PROMOCION), Promocion.class);
             add(new AgentActionSchema(COMPRA), Comprar.class);
 
+            // Schema Boletos
             ConceptSchema conceptSchema =  (ConceptSchema) getSchema(BOLETOS);
             conceptSchema.add(BOLETOS_NOMBRE,(PrimitiveSchema)getSchema((BasicOntology.STRING)));
             conceptSchema.add(BOLETOS_ASIENTO,(PrimitiveSchema)getSchema((BasicOntology.INTEGER)));
@@ -54,13 +66,22 @@ public class OntologiaCine extends Ontology {
             conceptSchema.add(BOLETOS_FECHA,(PrimitiveSchema)getSchema((BasicOntology.STRING)));
             conceptSchema.add(BOLETOS_CANTIDAD,(PrimitiveSchema)getSchema((BasicOntology.INTEGER)));
 
+            // Schema Paquetes
+            ConceptSchema conceptSchema1 =  (ConceptSchema) getSchema(PAQUETE);
+            conceptSchema1.add(PAQUETE_NOMBRE,(PrimitiveSchema)getSchema((BasicOntology.STRING)));
+            conceptSchema1.add(PAQUETE_TIPO,(PrimitiveSchema)getSchema((BasicOntology.INTEGER)));
+            conceptSchema1.add(PAQUETE_PRECIO,(PrimitiveSchema)getSchema((BasicOntology.FLOAT)));
+            conceptSchema1.add(PAQUETE_CANTIDAD,(PrimitiveSchema)getSchema((BasicOntology.INTEGER)));
+            conceptSchema1.add(PAQUETE_DESCRIPCION,(PrimitiveSchema)getSchema((BasicOntology.STRING)));
+
             // Schema promocion
             PredicateSchema predicateSchema = (PredicateSchema) getSchema(PROMOCION);
+            predicateSchema.add(PROMOCION_BOLETOS, (ConceptSchema)getSchema(BOLETOS));
 
-
-
-
-
+            // Schema accion comprar
+            AgentActionSchema agentActionSchema = (AgentActionSchema) getSchema(COMPRA);
+            agentActionSchema.add(COMPRA_BOLETOS, (ConceptSchema) getSchema(BOLETOS));
+            agentActionSchema.add(COMPRA_PAQUETE, (ConceptSchema) getSchema(BOLETOS));
 
         } catch (OntologyException e){
             e.printStackTrace();
