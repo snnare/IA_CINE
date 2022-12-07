@@ -1,14 +1,14 @@
 package uaemex.ia.agentes;
 
 import jade.core.Agent;
-import jade.core.UnreachableException;
 import jade.core.behaviours.SimpleBehaviour;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.lang.acl.ACLMessage;
+import jade.lang.acl.UnreadableException;
+import uaemex.ia.control.Boletos;
+import java.util.List;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 public class Cajero extends Agent {
@@ -26,10 +26,10 @@ public class Cajero extends Agent {
         description.addServices(servicio);
 
         initComponents();
-        abrirPuesto();
+        //abrirPuesto();
 
         Cajero.WaitPingAndReplyBehaviour PingBehaviour;
-        PingBehaviour =  new Cajero().WWaitPingAndReplyBehaviour(this);
+        PingBehaviour =  new Cajero.WaitPingAndReplyBehaviour(this);
         addBehaviour(PingBehaviour);
     }
 
@@ -56,18 +56,34 @@ public class Cajero extends Agent {
 
                 try {
                     ACLMessage msg  = blockingReceive();
+                    if("J".equals((msg.getLanguage()))){
+                        List<Boletos> boletosList = (List<Boletos>) msg.getContentObject();
+                        String dialogo;
+                        dialogo = "Sumando....Cajero\n";
+
+                        for (int i = 0; i < boletosList.size(); i++) {
+                            suma += boletosList.get(i).getPrecio();
+                            dialogo+="C:"+boletosList.get(i).getNombre() + " $"+ boletosList.get(i).getPrecio() + "\n";
+                        }
+                        System.out.println(dialogo);
+                        dialogo+="\nLa cuenta es: $" +suma;
 
 
+                        System.out.println("C: Entregando la cuenta: ");
+                        System.out.println("C: Cuenta entregada");
+                    } else {
+                        System.out.println(getLocalName()+"C: Esto no esta bien :,v");
+                    }
 
-                }catch (UnreachableException ex){
-                    Logger.getLogger(VendedorTaquilla.class.getName()).log(Level.SEVERE, null, e);
+                } catch (UnreadableException e) {
+                    throw new RuntimeException(e);
                 }
             }
         }
 
         @Override
         public boolean done() {
-            return false;
+            return finished;
         }
     }
 

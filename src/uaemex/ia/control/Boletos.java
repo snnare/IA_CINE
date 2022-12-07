@@ -4,7 +4,7 @@ import jade.content.Concept;
 
 import java.io.Serializable;
 
-public class Boletos implements Concept, Serializable {
+public class Boletos implements Concept {
     private String nombre;
     private String asiento;
     private String tipoSala;

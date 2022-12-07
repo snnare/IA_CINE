@@ -4,7 +4,7 @@ import jade.content.Concept;
 
 import java.io.Serializable;
 
-public class Paquete  implements Concept, Serializable {
+public class Paquete  implements Concept {
     private String nombre;
     private int tipo;
     private float precio;
