@@ -65,8 +65,19 @@ public class Comprador extends Agent {
                                 send(message2);
                                 System.out.println("Compra solicitada");
                             } else {
+                                // En este caso se recibe un INFORM con el contenido incorrecto
+                                ACLMessage reply = msg.createReply();
+                                reply.setPerformative(ACLMessage.NOT_UNDERSTOOD);
+                                reply.setContent("(UnexpectedContect (expected ping))");
+                                send(reply);
 
                             }
+                        } else {
+                            // Recibiendo una performativa incorrecta
+                            ACLMessage reply = msg.createReply();
+                            reply.setPerformative(ACLMessage.NOT_UNDERSTOOD);
+                            reply.setContent("Unexpected-act "+ACLMessage.getPerformative(msg.getPerformative()));
+                            send(reply);
                         }
 
                     }
@@ -83,8 +94,16 @@ public class Comprador extends Agent {
 
         @Override
         public boolean done() {
-            return false;
+            return finished;
         }
     }
 
+
+    @Override
+    protected void setup() {
+        getContentManager().registerLanguage(codec);
+        getContentManager().registerOntology(ontology);
+        WaitPingAndReplyBehaviour PingBehaviour =  new WaitPingAndReplyBehaviour(this);
+        addBehaviour(PingBehaviour);
+    }
 }
