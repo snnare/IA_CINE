@@ -4,7 +4,6 @@ import jade.content.lang.Codec;
 import jade.content.lang.sl.SLCodec;
 import jade.content.onto.Ontology;
 import jade.core.Agent;
-import jade.core.Service;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 import uaemex.ia.control.Boletos;
@@ -21,7 +20,6 @@ public class VendedorTaquilla extends Agent {
     private Codec codec = new SLCodec();
     private Ontology ontology = OntologiaCine.getInstance();
 
-
     @Override
     protected void setup() {
         DFAgentDescription description = new DFAgentDescription();
@@ -36,13 +34,6 @@ public class VendedorTaquilla extends Agent {
 
         getContentManager().registerLanguage(codec);
         getContentManager().registerOntology(ontology);
-
-        initComponents();
-        //abrirPuesto();
     }
 
-
-    private void initComponents(){
-
-    }
 }

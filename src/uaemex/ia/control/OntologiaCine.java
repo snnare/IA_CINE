@@ -23,7 +23,9 @@ public class OntologiaCine extends Ontology {
     public static final String BOLETOS_FECHA = "Fecha";
     public static final String BOLETOS_CANTIDAD = "Cantidad";
 
-
+    public static final String HAY_BOLETOS ="Hay_boletos";
+    public static final String LUGARES_DISPONIBLES ="Lugares_Disponibles";
+    public static final String CLIENTES_DELANTE ="Clientes_Delante";
     public static final String PAQUETE = "Paquete";
     public static final String PAQUETE_NOMBRE = "Nombre";
     public static final String PAQUETE_TIPO = "Tipo";
@@ -39,6 +41,11 @@ public class OntologiaCine extends Ontology {
     public static final String COMPRA_BOLETOS = "Boletos";
     public static final String COMPRA_PAQUETE = "Paquete";
 
+    public static final String ORDEN ="Orden";
+    public static final String ORDER_BOLETOS ="Servicio";
+
+    public static final String COBRAR = "Cobrar";
+    public static final String COBRAR_BOLETO = "Boletos";
 
     private static Ontology instance = new OntologiaCine();
 
@@ -82,6 +89,12 @@ public class OntologiaCine extends Ontology {
             AgentActionSchema agentActionSchema = (AgentActionSchema) getSchema(COMPRA);
             agentActionSchema.add(COMPRA_BOLETOS, (ConceptSchema) getSchema(BOLETOS));
             agentActionSchema.add(COMPRA_PAQUETE, (ConceptSchema) getSchema(BOLETOS));
+
+
+            AgentActionSchema agentActionSchema1 = (AgentActionSchema) getSchema(COBRAR);
+            agentActionSchema1.add(COBRAR_BOLETO, (ConceptSchema) getSchema(BOLETOS));
+
+
 
         } catch (OntologyException e){
             e.printStackTrace();
